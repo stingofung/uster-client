@@ -1,0 +1,33 @@
+//WELCOME
+<span th:fragment="welcome-title">Rides and beyond!</span>
+<p th:fragment="welcome-description">Good things happen when people can move, whether across town or toward their dreams. Opportunities appear, open up, become reality. What started as a way to tap a button to get a ride has led to billions of moments of human connection as people around the world go all kinds of places in all kinds of ways with the help of our technology.</p>
+
+//DRIVER
+<span th:fragment="driver-title">Driver's profile</span>
+<p th:fragment="driver-description">A driver’s profile is full of intriguing information. Besides ratings, and trip history, you can view compliments or even thank-you notes left by riders like you. Getting to know one another makes for a brighter day—and a better ride.</p>
+
+<div th:fragment="driver" class="col-md-4">
+    <h2 th:include="this::driver-title"></h2>
+    <p th:include="this::driver-description"></p>
+    <p><a class="btn btn-primary" href="/drivers" role="button">View details &raquo;</a></p>
+</div>
+
+//VEHICLE
+<span th:fragment="vehicle-title">Vehicles</span>
+<p th:fragment="vehicle-description">USTER Vehicle Solutions program offers partnerships to help you find a car and start driving. Please note that vehicle options may vary by city. Consent to and pass a background check for eligibility to drive on the USTER App.</p>
+
+<div th:fragment="vehicle" class="col-md-4">
+    <h2 th:include="this::vehicle-title"></h2>
+    <p th:include="this::vehicle-description"></p>
+    <p><a class="btn btn-primary" href="/vehicles" role="button">View details &raquo;</a></p>
+</div>
+
+//TRIPS
+<span th:fragment="trip-title">Trips</span>
+<p th:fragment="trip-description">USTER Vehicle Solutions program offers partnerships to help you find a car and start driving. Please note that vehicle options may vary by city. Consent to and pass a background check for eligibility to drive on the USTER App.</p>
+
+<div th:fragment="trip" class="col-md-4">
+    <h2 th:include="this::trip-title">Trips</h2>
+    <p th:include="this::trip-description"></p>
+    <p><a class="btn btn-primary" href="/trips" role="button">View details &raquo;</a></p>
+</div>

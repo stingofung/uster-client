@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragment/header::head"></head>
+
+    <body>
+        <nav th:replace="fragment/header::navbar"></nav>
+
+        <main role="main">
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 th:include="fragment/general-info::welcome-title" class="display-3"></h1>
+                    <p th:replace="fragment/general-info::welcome-description"></p>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div th:replace="fragment/general-info::driver"></div>
+                    <div th:replace="fragment/general-info::vehicle"></div>
+                    <div th:replace="fragment/general-info::trip"></div>
+                </div>
+                <hr>
+            </div>
+        </main>
+
+        <footer th:replace="fragment/footer::full-footer"></footer>
+    </body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragment/header::head"></head>
+
+    <body>
+        <div th:replace="fragment/header::overlay"></div>
+        <div th:replace="fragment/header::notification"></div>
+
+        <nav th:replace="fragment/header::navbar"></nav>
+
+        <main role="main">
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 th:include="fragment/general-info::vehicle-title" class="display-3"></h1>
+                    <p th:replace="fragment/general-info::vehicle-description"></p>
+                </div>
+            </div>
+        </main>
+
+        <div class="container">
+            <h1>Vehicles list</h1>
+            <table id="vehicles-list" class="table table-striped table-bordered table-responsive nowrap" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Brand</th>
+                        <th>Model</th>
+                        <th>Plate</th>
+                        <th>License Required</th>
+                        <th><button type="button" class="btn btn-success" data-toggle="tooltip" title="New Record" onclick="recordNew();"><span class="color-white"><i class="fas fa-plus-circle"></i> Add</span></button></th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+        <input type="hidden" id="hdf_Id" name="hdf_Id" value="0" />
+        <div th:replace="fragment/pop-up::delete"></div>
+        <div class="remodal" data-remodal-id="dv_Form">
+            <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+            <form id="form1" role="form">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h2><span class="recordAction"></span><span class="recordType"></span></h2>
+                    </div>
+                    <div class="panel-body">
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="txt_Brand">Brand</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="txt_Brand" name="txt_Brand" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="txt_Model">Model</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="txt_Model" name="txt_Model" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="txt_Plate">Plate</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="txt_Plate" name="txt_Plate" class="form-control" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="txt_License">License Required</label>
+                            <div class="col-sm-10">
+                                <input type="text" id="txt_License" name="txt_License" class="form-control" maxlength="1" />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="buttons-panel float-right">
+                        <button type="button" class="btn btn-default" onclick="modal.close()">Cancel</button>
+                        <button type="button" class="btn btn-primary btn-save" onclick="if(validateForm(1)){saveAll();}">Save</button>
+                    </div>
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $("#form1").validate({
+                            rules: {
+                                txt_Branch: {
+                                    required: true
+                                },
+                                txt_Model: {
+                                    required: true
+                                },
+                                txt_Plate: {
+                                    required: true
+                                },
+                                txt_License: {
+                                    required: true,
+                                    maxlength: 1
+                                }
+                            },
+                        });
+                    });
+                </script>
+            </form>
+        </div>
+
+        <footer th:replace="fragment/footer::full-footer"></footer>
+
+        <div th:replace="fragment/script-web::vehicle"></div>
+    </body>
+</html>

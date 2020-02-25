@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+    <head th:replace="fragment/header::head"></head>
+
+    <body>
+        <div th:replace="fragment/header::overlay"></div>
+        <div th:replace="fragment/header::notification"></div>
+
+        <nav th:replace="fragment/header::navbar"></nav>
+
+        <main role="main">
+            <div class="jumbotron">
+                <div class="container">
+                    <h1 th:include="fragment/general-info::trip-title" class="display-3"></h1>
+                    <p th:replace="fragment/general-info::trip-description"></p>
+                </div>
+            </div>
+        </main>
+
+        <div class="container">
+            <div class="form-group">
+                <div class="float-left"><h1>Trips list</h1></div>
+                <div class="float-right">
+                    <button type="button" class="btn btn-success" data-toggle="tooltip" title="New Trip" onclick="recordNew();"><span class="color-white"><i class="fas fa-plus-circle"></i> Add</span></button>
+                </div>
+            </div>
+            <table id="trips-list" class="table table-striped table-bordered table-responsive nowrap" cellspacing="0" width="100%">
+                <thead>
+                    <tr>
+                        <th>Driver Id</th>
+                        <th>Driver Name</th>
+                        <th>Driver Surname</th>
+                        <th>Driver License</th>
+                        <th>Vehicle Id</th>
+                        <th>Vehicle Brand</th>
+                        <th>Vehicle Model</th>
+                        <th>Vehicle Plate</th>
+                        <th>Vehicle License</th>
+                        <th>Trip Date</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+
+
+
+
+
+
+
+
+        <div class="remodal" data-remodal-id="dv_Form">
+            <button data-remodal-action="close" class="remodal-close" aria-label="Close"></button>
+            <form id="form1" role="form">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h2><span class="recordAction"></span><span class="recordType"></span></h2>
+                    </div>
+                    <div class="panel-body">
+
+
+
+
+
+
+
+
+
+
+                        <div id="stepper1" class="bs-stepper">
+                            <div class="bs-stepper-header" role="tablist">
+                                <div class="step" data-target="#test-l-1">
+                                    <button type="button" class="step-trigger" role="tab" id="stepper1trigger1" aria-controls="test-l-1">
+                                        <span class="bs-stepper-circle">
+                                            <span class="fas fa-calendar-alt"></span>
+                                        </span>
+                                        <span class="bs-stepper-label">Date</span>
+                                    </button>
+                                </div>
+                                <div class="bs-stepper-line"></div>
+                                <div class="step" data-target="#test-l-2">
+                                    <button type="button" class="step-trigger" role="tab" id="stepper1trigger2" aria-controls="test-l-2">
+                                        <span class="bs-stepper-circle">
+                                            <span class="fas fa-car-side"></span>
+                                        </span>
+                                        <span class="bs-stepper-label">Vehicle</span>
+                                    </button>
+                                </div>
+                                <div class="bs-stepper-line"></div>
+                                <div class="step" data-target="#test-l-3">
+                                    <button type="button" class="step-trigger" role="tab" id="stepper1trigger3" aria-controls="test-l-3">
+                                        <span class="bs-stepper-circle">
+                                            <span class="fas fa-male"></span>
+                                        </span>
+                                        <span class="bs-stepper-label">Driver</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="bs-stepper-content">
+                                <form onSubmit="return false">
+                                    <div id="test-l-1" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger1">
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label" for="txt_Date">Trip Date</label>
+                                            <div class="col-sm-10">
+                                                <input type="text" id="txt_Date" name="txt_Date" class="form-control" />
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" onclick="stepper1.next(); loadVehicles()">Next</button>
+                                    </div>
+                                    <div id="test-l-2" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger2">
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label" for="slc_VehicleId">Vehicle</label>
+                                            <div class="col-sm-10">
+                                                <select id="slc_VehicleId" name="slc_VehicleId" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" onclick="stepper1.previous()">Previous</button>
+                                        <button type="button" class="btn btn-primary" onclick="stepper1.next()">Next</button>
+                                    </div>
+                                    <div id="test-l-3" role="tabpanel" class="bs-stepper-pane" aria-labelledby="stepper1trigger3">
+                                        <div class="form-group row">
+                                            <label class="col-sm-2 col-form-label" for="slc_DriverId">Driver</label>
+                                            <div class="col-sm-10">
+                                                <select id="slc_DriverId" name="slc_DriverId" class="form-control"></select>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-primary" onclick="stepper1.previous()">Previous</button>
+                                        <button type="button" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+                    </div>
+
+                </div>
+                <script type="text/javascript">
+                    $(document).ready(function () {
+
+                        var stepper = new Stepper($('.bs-stepper')[0])
+
+
+                        $("#form1").validate({
+                            rules: {
+                                txt_Name: {
+                                    required: true
+                                },
+                                txt_Surname: {
+                                    required: true
+                                },
+                                txt_License: {
+                                    required: true,
+                                    maxlength: 1
+                                }
+                            },
+                        });
+                    });
+                </script>
+            </form>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        <input type="hidden" id="hdf_Id" name="hdf_Id" value="0" />
+
+
+        <footer th:replace="fragment/footer::full-footer"></footer>
+
+        <div th:replace="fragment/script-web::trip"></div>
+    </body>
+</html>
